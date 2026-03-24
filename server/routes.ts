@@ -23,6 +23,12 @@ import {
 const voiceBodyParser = require("express").json({ limit: "50mb" });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // --- SAĞLIK KONTROLÜ (TEST İÇİN) ---
+  app.get("/api/health", (_req, res) => {
+    res.json({ status: "ok", message: "Server is running" });
+  });
+
+  // --- MEVCUT ROTARLAR ---
   app.post("/api/receipt-scan", scanReceipt);
   app.get("/api/market-prices", getMarketPrices);
   app.get("/api/bank-rates", getBankRates);
@@ -126,7 +132,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ success: true });
   });
 
-  // Apple Silme Gereksinimi (Düzeltildi)
+  // Apple Silme Gereksinimi
   app.delete("/api/user", async (_req, res) => {
     try {
       res.sendStatus(204);
