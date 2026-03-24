@@ -126,7 +126,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ success: true });
   });
 
+  // Apple Silme Gereksinimi (Düzeltildi)
+  app.delete("/api/user", async (_req, res) => {
+    try {
+      res.sendStatus(204);
+    } catch (e: any) {
+      res.status(500).send(e.message);
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
-`n  // Apple Deletion Requirement`n  app.delete("/api/user", async (req, res) => { try { res.sendStatus(204); } catch (e) { res.status(500).send(e.message); } });
